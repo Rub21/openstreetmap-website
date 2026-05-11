@@ -19,6 +19,7 @@
 # Indexes
 #
 #  gpx_files_timestamp_idx            (timestamp)
+#  gpx_files_user_id_idx              (user_id)
 #  gpx_files_visible_visibility_idx   (visible,visibility)
 #  index_gpx_files_on_user_id_and_id  (user_id,id)
 #
@@ -50,7 +51,7 @@ class Trace < ApplicationRecord
   validates :timestamp, :presence => true
   validates :visibility, :inclusion => %w[private public trackable identifiable]
   # New traces are restricted to public or identifiable and legacy values stay valid for existing records
-  validates :visibility, :inclusion => { :in => %w[public identifiable], :on => :create }
+  validates :visibility, :inclusion => { :in => %w[public identifiable], :on => :create, :message => "only public or identifiable values are accepted for new traces" }
 
   after_save :set_filename
 

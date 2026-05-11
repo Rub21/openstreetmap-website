@@ -49,6 +49,8 @@ class Trace < ApplicationRecord
   validates :description, :presence => { :on => :create }, :length => 1..255, :characters => true
   validates :timestamp, :presence => true
   validates :visibility, :inclusion => %w[private public trackable identifiable]
+  # New traces are restricted to public or identifiable and legacy values stay valid for existing records
+  validates :visibility, :inclusion => { :in => %w[public identifiable], :on => :create }
 
   after_save :set_filename
 

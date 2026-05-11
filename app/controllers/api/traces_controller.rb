@@ -28,12 +28,13 @@ module Api
       description = params[:description] || ""
       visibility = params[:visibility]
 
+      # Legacy parameter support: public=1 maps to public; public=0 is no longer accepted
       if visibility.nil?
-        visibility = if params[:public]&.to_i&.nonzero?
-                       "public"
-                     else
-                       "private"
-                     end
+        if params[:public]&.to_i&.nonzero?
+          visibility = "public"
+        else
+          raise OSM::APIBadUserInput, "The 'public=0' parameter is no longer supported. Specify visibility=public or visibility=identifiable instead."
+        end
       end
 
       if params[:file].respond_to?(:read)

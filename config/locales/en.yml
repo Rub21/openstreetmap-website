@@ -2955,9 +2955,9 @@ en:
   traces:
     visibility:
       private: "Private (only shared as anonymous, unordered points)"
-      public: "Public (shown in trace list and as anonymous, unordered points)"
+      public: "Public (trace not listed at /traces, points shared in API as anonymous)"
       trackable: "Trackable (only shared as anonymous, ordered points with timestamps)"
-      identifiable: "Identifiable (shown in trace list and as identifiable, ordered points with timestamps)"
+      identifiable: "Identifiable (trace listed at /traces, points shared in API as identifiable with timestamps)"
     new:
       upload_trace: "Upload GPS Trace"
       visibility_help: "what does this mean?"

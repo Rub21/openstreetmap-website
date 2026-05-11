@@ -36,8 +36,8 @@ class Trace < ApplicationRecord
   has_many :points, :class_name => "Tracepoint", :foreign_key => "gpx_id", :dependent => :delete_all, :inverse_of => :trace
 
   scope :visible, -> { where(:visible => true) }
-  scope :visible_to, ->(u) { visible.where(:visibility => %w[public identifiable]).or(visible.where(:user => u)) }
-  scope :visible_to_all, -> { where(:visibility => %w[public identifiable]) }
+  scope :visible_to, ->(u) { visible.where(:visibility => "identifiable").or(visible.where(:user => u)) }
+  scope :visible_to_all, -> { where(:visibility => "identifiable") }
   scope :tagged, ->(t) { joins(:tags).where(:gpx_file_tags => { :tag => t }) }
   scope :imported, -> { where(:inserted => true) }
 

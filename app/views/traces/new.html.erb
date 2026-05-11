@@ -8,9 +8,7 @@
   <%= f.text_field :description, :maxlength => 255 %>
   <%= f.text_field :tagstring %>
   <%= f.select :visibility,
-               [[t("traces.visibility.private"), "private"],
-                [t("traces.visibility.public"), "public"],
-                [t("traces.visibility.trackable"), "trackable"],
+               [[t("traces.visibility.public"), "public"],
                 [t("traces.visibility.identifiable"), "identifiable"]],
                :help => link_to(t(".visibility_help"), t(".visibility_help_url")) %>
   <%= f.primary %>

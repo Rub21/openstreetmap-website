@@ -3009,7 +3009,7 @@ en:
       trace_details: "View Trace Details"
       view_map: "View location on map"
       edit_map: "Open in editor"
-      public: "PUBLIC"
+      public: "ANONYMOUS"
       identifiable: "IDENTIFIABLE"
       private: "PRIVATE"
       trackable: "TRACKABLE"

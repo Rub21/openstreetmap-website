@@ -2955,7 +2955,7 @@ en:
   traces:
     visibility:
       private: "Private (only shared as anonymous, unordered points)"
-      public: "Public (trace not listed at /traces, points shared in API as anonymous)"
+      public: "Anonymous (trace not listed at /traces, points shared in API as anonymous)"
       trackable: "Trackable (only shared as anonymous, ordered points with timestamps)"
       identifiable: "Identifiable (trace listed at /traces, points shared in API as identifiable with timestamps)"
     new:

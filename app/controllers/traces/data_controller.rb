@@ -15,7 +15,7 @@ module Traces
     def show
       trace = Trace.visible.find(params[:trace_id])
 
-      if trace.public? || (current_user && current_user == trace.user)
+      if trace.identifiable? || (current_user && current_user == trace.user)
         if Acl.no_trace_download?(request.remote_ip)
           head :forbidden
         elsif request.format == Mime[:xml]

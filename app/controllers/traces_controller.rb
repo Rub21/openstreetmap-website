@@ -72,7 +72,7 @@ class TracesController < ApplicationController
   def show
     @trace = Trace.visible.find(params[:id])
 
-    if @trace.public? || @trace.user == current_user
+    if @trace.identifiable? || @trace.user == current_user
       @title = t ".title", :name => @trace.name
     else
       flash[:error] = t ".trace_not_found"

@@ -1867,6 +1867,7 @@ he:
         ku-Latn: כורדית (לטינית)
         lv: לטבית
         lb: לוקסמבורגית
+        lkt: לקוטה
         lt: ליטאית
         hu: הונגרית
         fit: פינית טורנדאלית
@@ -1953,7 +1954,9 @@ he:
     partners_fastly: פאסטלי
     partners_corpmembers: חברים תאגידיים אחרים ב־OSMF
     partners_partners: שותפים
-    terms_of_use: תנאי שימוש
+    welcome_tou_notice_html: השימוש באתר הזה או בכל תשתית אחרת שמסופקת על־ידי קרן
+      OpenStreetMap מהווה את הסכמתך ל%{terms_link}.
+    terms_of_use: תנאי השימוש
     tou: תנאי השימוש
     nothing_to_preview: אין מה להראות בתצוגה מקדימה.
     learn_more: מידע נוסף
@@ -2256,8 +2259,9 @@ he:
       update_success_flash:
         message: ההעדפות עודכנו.
       navigation:
-        preferences: העדפות
-        advanced_preferences: העדפות מתקדמות
+        preferences: ממשק
+        notification_preferences: הודעות
+        advanced_preferences: מתקדם
     basic_preferences:
       show:
         title: ההעדפות שלי
@@ -2278,6 +2282,14 @@ he:
           light: בהירה
           dark: כהה
         save: עדכון העדפות
+    notification_preferences:
+      show:
+        title: העדפות הודעות
+        direct_message: הודעות ישירות
+        new_follower: עוקבים חדשים
+        save: עדכון העדפות
+        delivery_mechanisms:
+          email: דוא״ל
     advanced_preferences:
       show:
         title: ההעדפות המתקדמות שלי
@@ -3247,9 +3259,9 @@ he:
           נוסף.
       or: או
       use external auth: לחלופין, אפשר להשתמש בצד שלישי כדי להירשם
-      verify_human: נא לאמת שמדובר בבן אדם
+      verify_human: נא לאמת שמדובר בבן־אדם
     create:
-      not_human: לרוע המזל, לא הצלחנו לאמת אם מדובר בבן אדם או לא. השלב הזה הכרחי
+      not_human: לרוע המזל, לא הצלחנו לאמת אם מדובר בבן־אדם או לא. השלב הזה הכרחי
         ליצירת חשבונות חדשים.
     no_such_user:
       title: אין משתמש כזה

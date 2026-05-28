@@ -211,7 +211,7 @@ nl:
         pass_crypt_confirmation: Wachtwoord bevestigen
     help:
       doorkeeper/application:
-        confidential: De applicatie wordt gebruikt waar het clientgeheim vertrouwelijk
+        confidential: De toepassing wordt gebruikt waar het clientgeheim vertrouwelijk
           kan worden gehouden (voor mobiele apparaten ontworpen apps en éénpagina-apps
           zijn niet vertrouwelijk)
         redirect_uri: Gebruik één regel per URI
@@ -385,9 +385,8 @@ nl:
         title: Voorwaarden
         heading: Voorwaarden
         heading_ct: Voorwaarden voor bijdragen
-        read and accept with tou: Lees de bijdragersovereenkomst en de gebruiksvoorwaarden,
-          vink beide selectievakjes aan als u klaar bent en druk vervolgens op de
-          knop Doorgaan.
+        read and accept with tou: Lees de Bijdragevoorwaarden en de Gebruiksvoorwaarden.
+          Vink beide vakjes aan en druk vervolgens op 'Doorgaan'.
         contributor_terms_explain: Deze overeenkomst regelt de voorwaarden voor uw
           bestaande en toekomstige bijdragen.
         read_ct: Ik heb de bovenstaande bijdragevoorwaarden gelezen en ga ermee akkoord
@@ -729,7 +728,7 @@ nl:
       user_title: Dagboek van %{user}
       discussion: Overleg
       subscribe: Abonneren
-      unsubscribe: Deabonneren
+      unsubscribe: Uitschrijven
       leave_a_comment: Een reactie achterlaten
       login_to_leave_a_comment_html: U moet zich %{login_link} om te kunnen reageren
       login: Aanmelden
@@ -1008,9 +1007,13 @@ nl:
           aboriginal_lands: Reservaat
           administrative: Administratieve grens
           census: Volkstellingsgrens
+          low_emission_zone: Lage-emissiezone
           national_park: Nationaal park
           political: Kiesgrens
+          postal_code: Postcode
           protected_area: Beschermd gebied
+          public_transport: Openbaar vervoersdistrict
+          timezone: Tijdzone
           "yes": Grens
         bridge:
           aqueduct: Aquaduct
@@ -1186,6 +1189,7 @@ nl:
           milestone: Historische mijlpaal
           mine: Mijn
           mine_shaft: Mijnschacht
+          monastery: Historisch klooster
           monument: Monument
           railway: Historische spoorweg
           roman_road: Romeinse weg
@@ -1453,6 +1457,7 @@ nl:
           abandoned: Vervallen spoorweg
           buffer_stop: Stootblok
           construction: Spoor in aanleg
+          crossing: Spoorweg-voetgangersovergang
           disused: Ongebruikte spoorweg
           funicular: Kabelspoorweg
           halt: Treinhalte
@@ -2301,8 +2306,9 @@ nl:
       update_success_flash:
         message: Voorkeuren bijgewerkt.
       navigation:
-        preferences: Voorkeuren
-        advanced_preferences: Geavanceerde voorkeuren
+        preferences: Interface
+        notification_preferences: Meldingen
+        advanced_preferences: Geavanceerd
     basic_preferences:
       show:
         title: Mijn voorkeuren
@@ -2323,6 +2329,19 @@ nl:
           light: Licht
           dark: Donker
         save: Voorkeuren bijwerken
+    notification_preferences:
+      show:
+        title: Meldingsvoorkeuren
+        changeset_comment: Opmerkingen bij de wijzigingsset
+        diary_comment: Dagboekreacties
+        direct_message: Directe berichten
+        gpx_import_failure: 'GPS-trace importeren: mislukt'
+        gpx_import_success: 'GPX-trace-import: succesvol'
+        new_follower: Nieuwe volgers
+        note_comment: Opmerkingen
+        save: Voorkeuren bijwerken
+        delivery_mechanisms:
+          email: E-mail
     advanced_preferences:
       show:
         title: Mijn geavanceerde voorkeuren
@@ -2848,7 +2867,7 @@ nl:
         Omdat Adobe Flash Player niet meer bestaat, kan Potlatch niet langer gebruikt
         worden in de webbrowser.
       desktop_application_html: U kunt Potlatch nog altijd gebruiken door %{download_link}.
-      download: het downloaden van de desktop-applicatie voor Mac en Windows
+      download: het downloaden van de desktoptoepassing voor Mac en Windows
       id_editor_html: U kunt ook uw standaardeditor op iD zetten. Dat werkt in uw
         browser zoals Potlatch dat vroeger deed. %{change_preferences_link}.
       change_preferences: Wijzig hier uw voorkeuren
@@ -3522,7 +3541,7 @@ nl:
       invalid_credentials: Ongeldige verificatiereferenties
       no_authorization_code: Geen autorisatiecode
       unknown_signature_algorithm: Onbekend algoritme voor handtekening
-      invalid_scope: Ongeldig toepassingsgebied
+      invalid_scope: Onjuist toepassingsgebied
       unknown_error: Authenticatie mislukt
     auth_association:
       heading: Uw ID is nog niet gekoppeld aan een OpenStreetMap-account.

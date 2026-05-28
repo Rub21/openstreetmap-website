@@ -392,8 +392,8 @@ cs:
         title: Podmínky
         heading: Podmínky
         heading_ct: Podmínky pro přispěvatele
-        read and accept with tou: Přečtěte si prosím podmínky pro přispěvatele a podmínky
-          užití, poté zaškrtněte obě políčka a stiskněte tlačítko pro pokračování.
+        read and accept with tou: Přečtěte si prosím Podmínky pro přispěvatele a Podmínky
+          užití, poté zaškrtněte obě políčka a stiskněte tlačítko „Pokračovat“.
         contributor_terms_explain: Touto dohodou se řídí podmínky pro vaše stávající
           a budoucí příspěvky.
         read_ct: Přečetl jsem si výše uvedené podmínky pro přispěvatele a souhlasím
@@ -1028,9 +1028,13 @@ cs:
           aboriginal_lands: Půda domorodců
           administrative: Administrativní hranice
           census: Hranice pro potřeby sčítání
+          low_emission_zone: Nízkoemisní zóna
           national_park: Národní park
           political: Volební hranice
+          postal_code: PSČ
           protected_area: Chráněné území
+          public_transport: Oblast integrovaného dopravního systému
+          timezone: Časové pásmo
           "yes": Hranice
         bridge:
           aqueduct: Akvadukt
@@ -1206,6 +1210,7 @@ cs:
           milestone: Historický milník
           mine: Důl
           mine_shaft: Důlní šachta
+          monastery: Historický klášter
           monument: Pomník
           railway: Historická železnice
           roman_road: Římská cesta
@@ -1473,6 +1478,7 @@ cs:
           abandoned: Opuštěná nebo zrušená železnice
           buffer_stop: Zarážedlo
           construction: Železnice ve výstavbě
+          crossing: Přechod přes železniční trať
           disused: Nepoužívaná železnice
           funicular: Lanová dráha
           halt: Železniční zastávka
@@ -1592,7 +1598,7 @@ cs:
           pet: Prodejna pro chovatele
           pet_grooming: Psí salon
           photo: Prodejna foto
-          seafood: Obchod s rybami nebo mořskými plody
+          seafood: Obchod s rybami nebo mořskými plody
           second_hand: Bazar
           sewing: Obchod se šicími potřebami
           shoes: Obuvnictví
@@ -1895,6 +1901,7 @@ cs:
         ia: Interlingua
         is: islandština
         it: italština
+        kw: kornština
         gcf: Guadeloupská kreolština
         ku-Latn: kurdština (latinka)
         lv: Lotyšština
@@ -1975,6 +1982,7 @@ cs:
   layouts:
     logo:
       alt_text: Logo OpenStreetMap
+    main_navigation: Hlavní
     layer_info: Informace o vrstvě
     start_mapping: Začít mapovat
     intro_header: Vítejte v OpenStreetMap!
@@ -2318,8 +2326,9 @@ cs:
       update_success_flash:
         message: Preference nastaveny.
       navigation:
-        preferences: Preference
-        advanced_preferences: Pokročilé preference
+        preferences: Rozhraní
+        notification_preferences: Upozornění
+        advanced_preferences: Pokročilé
     basic_preferences:
       show:
         title: Moje preference
@@ -2340,6 +2349,19 @@ cs:
           light: Světlé
           dark: Tmavé
         save: Nastavit preference
+    notification_preferences:
+      show:
+        title: Nastavení upozornění
+        changeset_comment: Komentáře k sadám změn
+        diary_comment: Komentáře k deníku
+        direct_message: Přímé zprávy
+        gpx_import_failure: 'Import GPS stopy: neúspěch'
+        gpx_import_success: 'Import GPS stopy: úspěch'
+        new_follower: Noví sledující
+        note_comment: Komentáře k poznámkám
+        save: Uložit preference
+        delivery_mechanisms:
+          email: E-mailem
     advanced_preferences:
       show:
         title: Moje pokročilé preference
@@ -2438,6 +2460,8 @@ cs:
       login_button: Přihlásit se
       with external: nebo se přihlaste prostřednictvím třetí strany
       or: nebo
+      reset_to_login: Omlouváme se, platnost vašeho hesla vypršela. Pro přihlášení
+        si prosím obnovte heslo.
       auth failure: Je mi líto, ale s uvedenými údaji se nemůžete přihlásit.
     destroy:
       title: Odhlásit se

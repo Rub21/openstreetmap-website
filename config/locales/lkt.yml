@@ -462,6 +462,8 @@ lkt:
     heading:
       title: Wóyutȟokča-opȟáȟte %{id}
       created_by_html: '%{created} he eháŋ %{link_user} káǧe.'
+    no_such_entry:
+      heading: Aŋpél'okigwapi wówapi %{id} waníča
   dashboards:
     contact:
       km away: hetáŋ %{count}km
@@ -512,7 +514,11 @@ lkt:
       leave_a_comment: Wóeye waŋ owá yo/ye
       login_to_leave_a_comment_html: Wóeye waŋ oyáwa eháŋtaŋš, %{login_link} yo/ye
       login: čhaž'óigwa
+    no_such_entry:
+      title: Aŋpél'okigwapi wówapi kiŋ le waníča
     diary_entry:
+      comment_link: Aŋpél'okigwapi wówapi kiŋ le akáŋn wóeye owá yo/ye
+      reply_link: Tuwá owá kiŋ ektá wónaȟ’uŋ yeyá yo/ye
       comment_count:
         other: wóeye %{count}
       no_comments: Wóeye waníča
@@ -530,6 +536,18 @@ lkt:
       report: Wóeye kiŋ le el iglé yo/ye
     location:
       location: 'Tuktél:'
+    feed:
+      user:
+        title: '%{user} OpenStreetMap tȟaáŋpel''okigwapi wówapi káǧe kiŋ'
+        description: Lečhála %{user} OpenStreetMap tȟaáŋpel'okigwapi wówapi káǧe kiŋ
+      language:
+        title: OpenStreetMap %{language_name} aŋpél'okigwapi wówapi
+        description: Lečhála tuwá OpenStreetMap uŋ kiŋ tȟaáŋpel'okigwapi wówapi %{language_name}
+          ogná káǧapi kiŋ
+      all:
+        title: OpenStreetMap aŋpél'okigwapi wówapi
+        description: Lečhála tuwá OpenStreetMap uŋ kiŋ tȟaáŋpel'okigwapi wówapi káǧapi
+          kiŋ
     subscribe:
       heading: Aŋpél'okigwapi wóakhiye kiŋ le otȟáyapȟa yačhíƞ he?
       button: Wóakhiye otȟápȟa yo/ye
@@ -540,6 +558,7 @@ lkt:
       in_language: '%{language} ogná Aŋpél''okigwapi Wówapi'
       my_diary: Aŋpél'okigwapi Mitȟáwa
       new: Aŋpél'okigwapi Wówapi Théča
+      new_title: Aŋpél'okigwapi mitȟáwa mahél wówapi théča owá yo/ye
     profile_diaries:
       latest_diaries: Aŋpél'okigwapi Wówapi Iyótaŋ Théča
       comments:
@@ -558,7 +577,9 @@ lkt:
           select_account_for_resource_owner_not_configured: Doorkeeper ogná wókašna::OpenidConnect.configure.select_account_for_resource_owner
             missing configuration.
     scopes:
+      address: Makȟóčhažeyate waŋgláka yo/ye
       email: Wakȟáƞgli wóyakapi makȟóčhažeyate waŋgláka yo/ye
+      openid: Čhažé-oyáŋke gluwíčakȟa yo/ye
   errors:
     bad_request:
       title: Wówala šíča
@@ -651,8 +672,10 @@ lkt:
           post_office: Wówapi-oyúžužu
           prison: Owíčhakaške
           pub: Owáyatke-thípi
+          public_bath: Wóiglužaža owíčhotaya uƞ kiŋ
           public_bookcase: Wówapi-ognáke Owíčhotaya Uƞ
           public_building: Thiháŋska Owíčhotaya Uƞ
+          ranger_station: Wamákȟaškaŋ-Awaŋyaŋke Othí
           recycling: Phiyá Wóilagyapi Othí
           restaurant: Owóte-thípi
           school: Owáyawa
@@ -686,23 +709,31 @@ lkt:
           cowshed: Pteónažiŋ
           dormitory: Wayáwa Othí
           farm: Wóžuthi
+          garage: Iyéčhiŋkyaŋka-Wókheya
+          garages: Iyéčhiŋkyaŋka-Wókheya tóna
           greenhouse: Watȟótȟo othí
+          hangar: Kiŋyékhiyapi Othí
           hospital: Owáyazaŋke
           hotel: Oȟpáye-thípi
           house: Thípi
           houseboat: Thípi wáta
           hut: Wókheya
+          industrial: Wayúsolayapi Othí
           office: Omníȟuha-owá
           roof: Thičhé
           school: Owáyawa
           shed: Thikáitepa
           stable: Šuŋg'ónažiŋ
           sty: Khukhúše-othí
+          warehouse: Wógnaka Thípi Tȟáŋka
           "yes": Thiháŋska
         club:
+          sport: Oškáte Akíčiyapi Okȟólakičhiye
           "yes": Okȟólakičhiye
         craft:
+          beekeeper: Wičȟáyažipa-Awaŋyaŋke
           blacksmith: Omáskapȟe
+          brewery: Mnipíǧa-káǧapi Othí
           carpenter: ČhaŋkážipA
           dressmaker: Wakáǧeǧepi Wičhaša/Wíƞyaƞ
           electrician: Wakȟáŋgli yuhá
@@ -724,6 +755,7 @@ lkt:
           rest_area: Oózikiye
           road: Čhaƞkú
           steps: Oáli
+          stop: Čhaŋkú Inažiŋpi Wasábglepi
           street_lamp: Čhaŋkú-pȟetížaŋžaŋ
           "yes": Čhaƞkú
         historic:
@@ -881,6 +913,7 @@ lkt:
           abandoned: Mázačhaŋku Íȟpeyapi
           construction: Mázačhaŋku leháŋl Káǧapi
           halt: Mázačhaƞku-oínažiƞ
+          light_rail: Mázačhaŋkula
           rail: Mázačhaƞku
           station: Mázačhaƞku-oínažiƞ
           stop: Mázačhaƞku-oínažiƞ
@@ -1173,7 +1206,7 @@ lkt:
     header:
       about: OpenStreetMap-Ihóši
       communities: Okȟólakičhiye Kiŋ
-      copyright: Wayúota-wóiyowiƞkhiye
+      copyright: wayúota-wóiyowiƞkhiye
       donate: Mázaska kič'úŋ wo/we
       edit: Yutȟókeča
       edit_with: '%{editor} uƞ yutȟókeča'
@@ -1321,8 +1354,8 @@ lkt:
   preferences:
     preferences:
       navigation:
-        preferences: Wóigluštaŋ
-        advanced_preferences: Wóigluštaŋ Ektáwapȟaya
+        preferences: Otȟáwokaške
+        advanced_preferences: Ektáwapȟaya
     basic_preferences:
       show:
         title: Wóigluštaŋ
@@ -1342,6 +1375,10 @@ lkt:
           light: Ožáƞžaƞ
           dark: Okpáza
         save: Wóigluštaŋ Yutȟókeča yo/ye
+    notification_preferences:
+      show:
+        delivery_mechanisms:
+          email: Wakȟáƞgli wóyakapi
     advanced_preferences:
       show:
         title: Wóigluštaŋ Ektáwapȟaya
@@ -1403,6 +1440,7 @@ lkt:
       url: URL
     richtext_field:
       edit: Yutȟókeča
+      preview: Owáŋyaŋke-íȟaŋhaŋ
       help: Wóokiye
     pagination:
       changeset_comments:
@@ -1415,6 +1453,11 @@ lkt:
         newer: Wóeye Isáŋm Tȟéča
         oldest: Wóeye Iyótaŋ Kaŋ
         newest: Wóeye Iyótaŋ Tȟéča
+      diary_entries:
+        older: Wówapi Isáŋm Kaŋ
+        newer: Wówapi Isáŋm Tȟéča
+        oldest: Wówapi Iyótaŋ Kaŋ
+        newest: Wówapi Iyótaŋ Tȟéča
       traces:
         older: Waóye Isáŋm Kaŋ
         newer: Waóye Isáŋm Théča
@@ -1433,8 +1476,23 @@ lkt:
   site:
     about:
       heading_html: '%{copyright}OpenStreetMap %{br} tuwá kíč''uŋ kiŋ'
+      used_by_html: '%{name} otȟáwokaške, omás’apȟela-wíkhičhaŋye na maswíkhičhaŋye
+        khektópawiŋǧe ektá makȟówapi-ihóši kiŋ kpamni.'
     about_section:
+      local_knowledge_title: Makȟóčhe Tȟawóslolye
+      local_knowledge_html: OpenStreetMap ektá, makȟóčhe tȟawóslolye yuonihaŋpi. Tuwe
+        kič'uŋ kiŋ GPS wíkhičhaŋye, kiŋyékhiyapi etaŋhaŋ itowapi kiŋ, na ikčé-makȟówapi
+        ogná OSM yuwíčakȟapi.
+      community_driven_title: Wičhóthi Iglúblihečapi
+      community_driven_1_html: "OpenStreetMap tȟawíčhothi wičhótȟokeča yuhápi, blihélya
+        škéhaŋpi, na aŋpétu iyóhi iglúotapi. Wičhótȟi égna makȟówapi-káǧapi, GIS-wíyukčaŋ,
+        OSM wóuƞspe-omnáye awaŋyaŋkapi kiŋ, tuwá wóakhipȟa el ówičhakiyapi kiŋ, na
+        tuwa uŋma óta. \nOpenStreetMap tȟawíčhothi uŋspénič'iya yačhíŋ, %{osm_blog_link},
+        %{user_diaries_link}, %{community_blogs_link}, na %{osm_foundation_link} otȟáwokaške
+        yawá yo/ye."
+      community_driven_osm_blog: OpenStreetMap wótȟaƞiƞ-wówapi
       community_driven_user_diaries: aŋpél'okigwapi
+      community_driven_community_blogs: wičhothi wótȟaƞiƞ-wówapi
       community_driven_osm_foundation: OSM Okȟólakičhiye
       open_data_copyright_license: Wayúota-wóiyowiƞkhiye na Wóopȟe-wóiyowiƞkhiye oyúblaye
       legal_title: Wóopȟe Kiƞ
@@ -1446,22 +1504,36 @@ lkt:
       legal_attribution_example_film_url: https://wiki.openstreetmap.org/wiki/Films
       legal_attribution_example_tv_title: Wičhítenaškaŋškaŋ
       legal_attribution_example_tv_url: https://wiki.openstreetmap.org/wiki/TV_series
+      legal_2_1_html: Wóopȟe wóiyowiƞkhiye, wówaiyowaža naíŋš wóopȟe uŋmá awínuŋǧa
+        yačhíŋ, %{contact_the_osmf_link}.
+      legal_2_1_contact_the_osmf: OSMF wówičhakiyaka yo/ye
     copyright:
       title: Wayúota-wóiyowiƞkhiye na Wóopȟe-wóiyowiƞkhiye
       foreign:
         title: Wóyuiyeska kiŋ le ihóši
+        html: Lakȟótiapi oyúblaye kiŋ le na %{english_original_link} hečhétukičhila
+          šni eháŋtaŋš, Wašíču-Iapi oyúblaye kiŋ oyihe kte.
+        english_link: Wašíču-Iapi oyúblaye kiŋ
       native:
         html: Waŋná Wašíču Iyápi ogná wayúota-wóiyowiƞkhiye oyúblaye waŋláke. %{native_link}
           ektá yakhíyagle oyákihi, naíŋš wayúota-wóiyowiƞkhiye iwálawa-alúštaŋ na
           %{mapping_link} oyákihi.
         mapping_link: makȟóyawa
       legal_babble:
+        lead_1_html: |-
+          OpenStreetMap otȟáwokaške, omás’apȟela-wíkhičhaŋye na maswíkhičhaŋye khektópawiŋǧe ektá makȟówapi-ihóši kiŋ oyúškeya kpamní.
+          OpenStreetMap wičhóthi iyeničhečapi. Tuwá makȟówapi-ihóši kiŋ káǧapi na aphíyapi. Makȟásitomniyaŋ, héčhed táku óta yaítowapi: čhaŋkú, owóte-thípi, mázačhaŋku na táku uŋmá óta yaítowapi.
         lead_2_html: |-
-          %{learn_more_about_osm_link} na %{get_started_mapping_link}!
+          %{learn_more_about_osm_link} na %{get_started_mapping_link} yo/ye!
           %{osm_blog_link} ektá waláwa oyákihi, na %{weeklyosm_link} ektá wótȟaƞiƞ otȟápȟa oyákihi.
           %{osm_community_link} ektá tuwá makȟówapi kiƞ iyéyaya oyákihi.
-          Nakúŋ %{osm_foundation_link} ópȟa na %{making_donation_link} el mázaska kič’úŋ oyákihi.
+          Nakúŋ %{osm_foundation_link} óyapȟa na %{making_donation_link} oyákihi.
+        lead_2_learn_more_about_osm: OpenStreetMap uŋspéič'iya
+        lead_2_get_started_mapping: makȟówa
+        lead_2_osm_blog: OpenStreetMap Wótȟaƞiƞ-Wówapi
+        lead_2_osm_community: OSM wicȟóthi
         lead_2_osm_foundation: OSM Okȟólakičhiye
+        lead_2_making_donation: mázaska yéč’uŋ
         licensing_3_creative_commons_license_url: https://creativecommons.org/licenses/by-sa/2.0/
         licensing_4_osmf_license_page: OSMF Wóopȟe-wóiyowiƞkhiye oyúblaye
         credit_4_v2025_this_copyright_page: wayúota-wóiyowiƞkhiye oyúblaye kiŋ le
@@ -1511,14 +1583,22 @@ lkt:
         cancel: Yužúžu wo/we
         download: Khulwókšu wo/we
     fixthemap:
+      title: Wóglušna el iglé / Makȟówapi kiŋ apȟíya
       how_to_help:
         title: Léčhel Óyakiya Oyákihi
+        join_the_community:
+          title: Wičhóti kiŋ ópȟa yo/ye
       other_concerns:
         copyright: wayúota-wóiyowiƞkhiye oyúblaye
+        working_group: OSMF Wówaši-Optáye
     help:
+      title: Wóokiye-ihóši Iyéyapi
       welcome:
         url: /welcome
         title: Taŋyáŋ OpenStreetMap Ektá Yahí
+      beginners_guide:
+        title: Lečhá-Uŋspeič’ičhiya Wówapi
+        description: Wičhóta kiŋ wówapi kiŋ le ogná lečhá-uŋspeič’ičhiya kiŋ wahókuŋwičhakhiyapi.
       irc:
         title: IRC
       switch2osm:
@@ -1590,6 +1670,7 @@ lkt:
         local_bike_route: Wičháša-itȟókšu
         train: Mázačhaƞku
         subway: Makȟámahel-mázačhaŋku
+        light_rail: Mázačhaŋkula
         bus: Wičháša-itȟókšu
         runway: Kiŋyékhiyapi-oíŋyaŋke
         capital: Pȟayá-otȟúŋwahe

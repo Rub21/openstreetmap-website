@@ -320,9 +320,9 @@ ia:
         title: Conditiones
         heading: Conditiones
         heading_ct: Conditiones de contributor
-        read and accept with tou: Per favor, lege le accordo de contributor e le conditiones
+        read and accept with tou: Per favor, lege le Accordo de contributor e le Conditiones
           de uso, marca ambe quadratos quando tu es finite e pois preme le button
-          Continuar.
+          “Continuar”.
         contributor_terms_explain: Iste accordo regula le conditiones de tu contributiones
           existente e futur.
         read_ct: Io ha legite e io accepta le precedente terminos de contributor
@@ -948,9 +948,13 @@ ia:
           aboriginal_lands: Territorios aborigine
           administrative: Limite administrative
           census: Limite de censo
+          low_emission_zone: Zona a basse emissiones
           national_park: Parco national
           political: Circumscription electoral
+          postal_code: Codice postal
           protected_area: Area protegite
+          public_transport: Districto de transporto public
+          timezone: Fuso horari
           "yes": Frontiera
         bridge:
           aqueduct: Aqueducto
@@ -1126,6 +1130,7 @@ ia:
           milestone: Petra milliari historic
           mine: Mina
           mine_shaft: Puteo de mina
+          monastery: Monasterio historic
           monument: Monumento
           railway: Ferrovia historic
           roman_road: Via roman
@@ -1393,6 +1398,7 @@ ia:
           abandoned: Ferrovia abandonate
           buffer_stop: Guardacolpos
           construction: Ferrovia in construction
+          crossing: Cruciamento inter ferrovia e sentiero
           disused: Ferrovia in disuso
           funicular: Ferrovia funicular
           halt: Halto de traino
@@ -1813,10 +1819,12 @@ ia:
         ia: Interlingua
         is: Islandese
         it: Italiano
+        kw: Cornico
         gcf: Creolo de Guadalupe
         ku-Latn: Kurdo (latin)
         lv: Letton
         lb: Luxemburgese
+        lkt: Lakota
         lt: Lituano
         hu: Hungaro
         fit: Finnese tornedalian
@@ -1892,6 +1900,7 @@ ia:
   layouts:
     logo:
       alt_text: Logo de OpenStreetMap
+    main_navigation: Principal
     layer_info: Information sur le strato
     start_mapping: Comenciar a cartographiar
     intro_header: Benvenite a OpenStreetMap!
@@ -1901,6 +1910,9 @@ ia:
       e altere %{partners}.
     partners_corpmembers: Membros corporative de OSMF
     partners_partners: partners
+    welcome_tou_notice_html: Per le uso de iste sito web o altere infrastructura fornite
+      per le Fundation OpenStreetMap, tu accepta le %{terms_link}.
+    terms_of_use: Conditiones de uso
     tou: Conditiones de uso
     nothing_to_preview: Nihil a previsualisar.
     learn_more: Leger plus
@@ -2232,8 +2244,9 @@ ia:
       update_success_flash:
         message: Preferentias actualisate.
       navigation:
-        preferences: Preferentias
-        advanced_preferences: Preferentias avantiate
+        preferences: Interfacie
+        notification_preferences: Notificationes
+        advanced_preferences: Avantiate
     basic_preferences:
       show:
         title: Mi preferentias
@@ -2254,6 +2267,19 @@ ia:
           light: Clar
           dark: Obscur
         save: Actualisar preferentias
+    notification_preferences:
+      show:
+        title: Preferentias de notification
+        changeset_comment: Commentos de gruppo de modificationes
+        diary_comment: Commentos de diario
+        direct_message: Messages directe
+        gpx_import_failure: 'Importation tracia GPS: fallimento'
+        gpx_import_success: 'Importation tracia GPS: successo'
+        new_follower: Nove sequitores
+        note_comment: Commentos de nota
+        save: Actualisar preferentias
+        delivery_mechanisms:
+          email: E-mail
     advanced_preferences:
       show:
         title: Mi preferentias avantiate
@@ -2266,6 +2292,7 @@ ia:
         image: Imagine
         company: Compania
         location: Loco
+        contribution_calendar: Calendario de contributiones
     descriptions:
       show:
         title: Modificar profilo
@@ -2326,12 +2353,14 @@ ia:
         failure: Non poteva actualisar le loco del profilo.
     heatmaps:
       show:
-        title: Configurar le carta de calor
-        save: Actualisar le configuration del carta de calor
+        title: Configurar le calendario de contributiones
+        show_contribution_calendar_in_public: Monstrar le calendario de contributiones
+          sur tu pagina de profilo
+        save: Actualisar le configuration del calendario de contributiones
         cancel: Cancellar
       update:
-        success: Carta de calor actualisate.
-        failure: Non poteva actualisar le carta de calor.
+        success: Calendario de contributiones actualisate.
+        failure: Non poteva actualisar le calendario de contributiones.
   sessions:
     new:
       tab_title: Aperir session
@@ -2349,6 +2378,8 @@ ia:
       login_button: Aperir session
       with external: o usa un tertio pro aperir session
       or: o
+      reset_to_login: Tu contrasigno ha expirate. Per favor reinitialisa tu contrasigno
+        pro aperir session.
       auth failure: Pardono, non poteva aperir un session con iste detalios.
     destroy:
       title: Clauder session
@@ -2458,7 +2489,7 @@ ia:
         assecura te de attribuer los a OpenStreetMap. Consulta %{attribution_guidelines_link}
         pro plus information.
       legal_attribution_guidelines_title: Directivas de attribution
-      legal_attribution_guidelines_url: https://wiki.osmfoundation.org/wiki/Licence/Attribution_Guidelines
+      legal_attribution_guidelines_url: https://osmfoundation.org/wiki/Licence/Attribution_Guidelines
       legal_1_3_html: In le caso specific de usar un captura de schermo de OpenStreetMap
         directemente in tu libro, publication, film o programma de television, non
         es necessari demandar permission perque le datos in OpenStreetMap es aperte
@@ -2615,6 +2646,8 @@ ia:
         contributors_hr_croatia: Croatia
         contributors_hr_dgu: Administration Geodetic Statal de Croatia
         contributors_hr_open_data_portal: Portal national de datos aperte
+        contributors_nl_credit_new_html: '%{netherlands}: Contine datos &copy; AND,
+          2007'
         contributors_nl_netherlands: Nederlandia
         contributors_nz_credit_html: |-
           %{new_zealand}: Contine datos proveniente del %{linz_data_service_link}
@@ -2982,6 +3015,14 @@ ia:
         %{height}
       download: Discargar
       downloading: Discargamento…
+  webgl_error_panes:
+    show:
+      compact_message: WebGL es necessari pro iste carta.
+      description_html: Pare que %{your_browser_does_not_support_webgl}, un technologia
+        pro render graphicos 3D sur le web.
+      your_browser_does_not_support_webgl: tu navigator non supporta WebGL
+      webgl_is_required_for_this_map: WebGL es necessari pro monstrar iste carta.
+      read_more_about_webgl: Leger plus
   traces:
     visibility:
       private: Private (solmente condividite como anonymo, punctos non ordinate)
@@ -3027,13 +3068,13 @@ ia:
       points: 'Punctos:'
       start_coordinates: 'Coordinata de initio:'
       coordinates_html: '%{latitude}; %{longitude}'
-      map: carta
-      edit: modificar
+      map: vider position sur carta
+      edit: aperir in editor
       owner: 'Proprietario:'
       description: 'Description:'
       tags: 'Etiquettas:'
       none: Nulle
-      edit_trace: Modificar iste tracia
+      edit_trace: Modificar le detalios del tracia
       delete_trace: Deler iste tracia
       trace_not_found: Tracia non trovate!
       visibility: 'Visibilitate:'
@@ -3045,8 +3086,8 @@ ia:
         other: '%{count} punctos'
       more: plus
       trace_details: Vider detalios del tracia
-      view_map: Vider carta
-      edit_map: Modificar carta
+      view_map: Vider position sur carta
+      edit_map: Aperir in editor
       public: PUBLIC
       identifiable: IDENTIFICABILE
       private: PRIVATE
@@ -3256,6 +3297,10 @@ ia:
           pro plus information.
       or: o
       use external auth: o usa un tertio pro aperir session
+      verify_human: Verifica que tu es un esser human
+    create:
+      not_human: Infortunatemente, nos non pote confirmar que tu es un esser human.
+        Isto es necessari pro crear nove contos.
     no_such_user:
       title: Iste usator non existe
       heading: Le usator %{user} non existe
@@ -3314,6 +3359,7 @@ ia:
       change_image: Cambiar imagine
       edit_company: Modificar compania
       edit_location: Modificar loco
+      edit_contribution_calendar: Configurar le calendario de contributiones
       contributions:
         one: '%{count} contribution in the le ultime anno'
         other: '%{count} contributiones in le ultime anno'
@@ -3654,6 +3700,10 @@ ia:
       tooltip: Legenda
       tooltip_disabled: Le legenda non es disponibile pro iste strato
     map:
+      map:
+        title: Carta
+        marker:
+          title: Marcator sur carta
       popup:
         close: Clauder
       navigation_control:
@@ -3668,6 +3718,8 @@ ia:
         feetPopup:
           one: Tu es minus de %{count} pede distante de iste puncto
           other: Tu es minus de %{count} pedes distante de iste puncto
+      attribution_control:
+        toggle_attribution: Alternar attribution
       base:
         standard: Standard
         cycle_map: Carta cyclista

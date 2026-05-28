@@ -72,13 +72,13 @@ be-Tarask:
       old_node: Стары вузел
       old_node_tag: Стары тэґ вузлу
       old_relation: Стары зьвязак
-      old_relation_member: Стары аб'ект зьвязку
+      old_relation_member: Стары член зьвязку
       old_relation_tag: Стары тэґ зьвязку
       old_way: Старая лінія
       old_way_node: Стары вузел лініі
       old_way_tag: Стары тэґ лініі
       relation: Зьвязак
-      relation_member: Аб'ект зьвязку
+      relation_member: Член зьвязку
       relation_tag: Тэґ зьвязку
       report: скаргу
       session: Сэсыя
@@ -323,7 +323,7 @@ be-Tarask:
         read and accept with tou: Калі ласка, прачытайце пагадненьне ўдзельніцтва
           й умовы ўжываньня, потым пастаўце абедзьве птушачкі і націсьніце кнопку
           працягнуць.
-        contributor_terms_explain: Гэтае пагадненьне вызначае ўмовы вашага існуючага
+        contributor_terms_explain: Гэтае пагадненьне вызначае ўмовы вашага існага
           ці будучага ўнёску.
         read_ct: Я прачытаў(-ла) і згодны(-на) з вышэйзгаданымі ўмовамі ўдзельніцтва
         tou_explain:
@@ -399,12 +399,12 @@ be-Tarask:
         other: частка ліній %{related_ways}
     relation:
       title_html: 'Зьвязак: %{name}'
-      members: Аб'екты
+      members: Члены
       members_count:
-        one: '%{count} аб''ект'
-        few: '%{count} аб''екты'
-        many: '%{count} аб''ектаў'
-        other: '%{count} аб''ектаў'
+        one: '%{count} член'
+        few: '%{count} члены'
+        many: '%{count} членаў'
+        other: '%{count} членаў'
     relation_member:
       entry_role_html: '%{type} %{name} як %{role}'
       type:
@@ -434,9 +434,9 @@ be-Tarask:
         way: лініі
         relation: зьвязак
     start_rjs:
-      feature_warning: Заладаваньне %{num_features} аб'ектаў можа моцна запаволіць
-        браўзэр. Сапраўды паказаць гэтыя зьвесткі?
-      feature_error: 'Не атрымалася заладаваць аб''екты: %{message}'
+      feature_warning: Ладаваньне %{num_features} аб'ектаў можа моцна запаволіць браўзэр.
+        Сапраўды паказаць гэтыя зьвесткі?
+      feature_error: 'Не ўдалося заладаваць аб''екты: %{message}'
       load_data: Ладаваць зьвесткі
       loading: Ладаваньне…
     tag_details:
@@ -521,7 +521,7 @@ be-Tarask:
     not_found_message:
       sorry: 'На жаль, зьвязак #%{id} вэрсіі %{version} ня знойдзены.'
     timeout:
-      sorry: На жаль, сьпіс аб'ектаў зьвязка з ідэнтыфікатарам %{id} занадта вялікі
+      sorry: На жаль, сьпіс членаў зьвязка з ідэнтыфікатарам %{id} занадта вялікі
         для атрыманьня.
   changeset_comments:
     feeds:
@@ -844,7 +844,7 @@ be-Tarask:
           bar: Бар
           bbq: BBQ
           bench: Лаўка
-          bicycle_parking: Роварная паркоўка
+          bicycle_parking: Роварны паркінґ
           bicycle_rental: Пракат ровараў
           bicycle_repair_station: Станцыя рамонту ровараў
           biergarten: Піўны двор
@@ -896,12 +896,12 @@ be-Tarask:
           mobile_money_agent: Аґэнт тэлефонавых грошай
           monastery: Кляштар
           money_transfer: Абмен валюты
-          motorcycle_parking: Паркоўка матацыклаў
+          motorcycle_parking: Паркінґ матацыклаў
           music_school: Музычная школа
           nightclub: Начны клюб
           nursing_home: Дом састарэлых
           parking: Стаянка
-          parking_entrance: Заезд на паркоўку
+          parking_entrance: Заезд на паркінґ
           parking_space: Паркавальны пляц
           payment_terminal: Плацёжны тэрмінал
           pharmacy: Аптэка
@@ -947,9 +947,13 @@ be-Tarask:
           aboriginal_lands: Землі абарыґенаў
           administrative: Адміністрацыйная мяжа
           census: Мяжа перапісу насельніцтва
+          low_emission_zone: Зона нізкага выкіду
           national_park: Нацыянальны парк
           political: Мяжа выбарчай акругі
+          postal_code: Паштовы індэкс
           protected_area: Ахоўная зона
+          public_transport: Раён грамадзкага транспарту
+          timezone: Часавы пояс
           "yes": Мяжа
         bridge:
           aqueduct: Аквэдук
@@ -1125,6 +1129,7 @@ be-Tarask:
           milestone: Гістарычны дарожны слуп
           mine: Капальня
           mine_shaft: Шахтавы ствол
+          monastery: Гістарычны манастыр
           monument: Помнік
           railway: Гістарычная чыгунка
           roman_road: Рымская дарога
@@ -1392,6 +1397,7 @@ be-Tarask:
           abandoned: Занядбаная чыгунка
           buffer_stop: Буфэрны прыпынак
           construction: Будаўніцтва чыгункі
+          crossing: Чыгуначны пераезд
           disused: Нядзейная чыгунка
           funicular: Фунікулер
           halt: Чыгуначны прыпынак
@@ -2146,12 +2152,12 @@ be-Tarask:
         notice: Паведамленьне пазначанае як непрачытанае
     mutes:
       destroy:
-        notice: Паведамленьне перасунута ў Уваходзячыя
-        error: Паведамленьне ня можа быць перасунута ў Уваходзячыя
+        notice: Паведамленьне перасунута ў Уваходныя
+        error: Паведамленьне ня можа быць перасунута ў Уваходныя
     mailboxes:
       heading:
-        my_inbox: Уваходзячыя
-        my_outbox: Выходзячыя
+        my_inbox: Уваходныя
+        my_outbox: Выходныя
         muted_messages: Сьцішаныя паведамленьні
       messages_table:
         from: Ад
@@ -2163,10 +2169,10 @@ be-Tarask:
         unread_button: Пазначыць як непрачытанае
         read_button: Пазначыць як прачытанае
         destroy_button: Выдаліць
-        unmute_button: Перасунуць у Уваходзячыя
+        unmute_button: Перасунуць у Ўваходныя
     inboxes:
       show:
-        title: Уваходзячыя
+        title: Уваходныя
         messages: У вас %{new_messages} і %{old_messages}
         new_messages:
           one: '%{count} новае паведамленьне'
@@ -2188,7 +2194,7 @@ be-Tarask:
           other: '%{count} сьцішаных паведамленьняў'
     outboxes:
       show:
-        title: Зыходзячыя
+        title: Выходныя
         messages:
           one: У вас %{count} дасланае паведамленьне
           few: у вас %{count} дасланыя паведамленьні
@@ -2229,8 +2235,9 @@ be-Tarask:
       update_success_flash:
         message: Налады абноўлены.
       navigation:
-        preferences: Налады
-        advanced_preferences: Пашыраныя налады
+        preferences: Інтэрфэйс
+        notification_preferences: Абвесткі
+        advanced_preferences: Дадаткова
     basic_preferences:
       show:
         title: Налады
@@ -2251,6 +2258,19 @@ be-Tarask:
           light: Сьветлае
           dark: Цёмнае
         save: Абнавіць налады
+    notification_preferences:
+      show:
+        title: Налады абвестак
+        changeset_comment: Камэнтары да набораў зьменаў
+        diary_comment: Камэнтары да дзёньніку
+        direct_message: Новыя паведамленьні
+        gpx_import_failure: Памылкі імпарту GPS-трэку
+        gpx_import_success: Пасьпяховыя імпарты GPS-трэку
+        new_follower: Новыя глядачы
+        note_comment: Камэнтары да заўвагаў
+        save: Абнавіць налады
+        delivery_mechanisms:
+          email: Электронная пошта
     advanced_preferences:
       show:
         title: Пашыраныя налады
@@ -2786,7 +2806,7 @@ be-Tarask:
         title: Што ёсьць на мапе
         on_the_map_html: OpenStreetMap гэта месца, дзе пазначаюцца рэчы станам на
           %{real_and_current} - гэта мільёны будынкаў, дарогаў ды іншых дэталёў пра
-          месцы. Можна дадаваць якія заўгодна існыя рысы, што зацікавілі.
+          месцы. Можна дадаваць якія заўгодна існыя аб'екты, што зацікавілі.
         real_and_current: цяпер і зараз
         off_the_map_html: Тут %{doesnt} памяркоўныя зьвесткі накшталт рэйтынґаў, былых
           ці гіпатэтычных аб'ектаў, зьвесткі з прыватных крыніцаў. Ня варта дадаваць
@@ -2838,10 +2858,10 @@ be-Tarask:
         list_text: 'Наступныя супольнасьці афіцыйна маюць пасаду мясцовых падрозьдзелаў:'
       other_groups:
         title: Іншыя супольнасьці
-        other_groups_html: Няма неабходнасьці афіцыйна рэґістраваць суполку як мясцовы
-          падрозьдзел. Насамрэч многія групы вельмі пасьпяхова існуюць у выглядзе
-          нефармальных сустрэч або суполак. Кожны можа заснаваць такую суполку або
-          далучыцца да яе. Больш падрабязна на %{communities_wiki_link}.
+        other_groups_html: Няма патрэбы афіцыйна рэґістраваць суполку як мясцовы падрозьдзел.
+          Насамрэч многія групы вельмі пасьпяхова існуюць у выглядзе нефармальных
+          сустрэч або суполак. Кожны можа заснаваць такую суполку або далучыцца да
+          яе. Больш падрабязна на %{communities_wiki_link}.
         communities_wiki: Вікі-старонцы супольнасьцяў
   social_links:
     show:
@@ -2937,8 +2957,8 @@ be-Tarask:
         bus_stop: Аўтобусны прыпынак
         bicycle_shop: Роварная крама
         bicycle_rental: Арэнда ровараў
-        bicycle_parking: Роварная паркоўка
-        bicycle_parking_small: Дробная роварная паркоўка
+        bicycle_parking: Роварны паркінґ
+        bicycle_parking_small: Малы роварны паркінґ
         toilets: Туалет
       see_external_legend: Глядзець поўную леґенду на новай старонцы
   share_panes:
@@ -3056,7 +3076,7 @@ be-Tarask:
       all_traces: Усе трэкі
       my_traces: Мае трэкі
       traces_from_html: Публічныя трэкі %{user}
-      remove_tag_filter: Выдаліць фільтр тэґаў
+      remove_tag_filter: Выдаліць фільтар тэґаў
     destroy:
       scheduled_for_deletion: Трэк заплянаваны на выдаленьне
     offline_warning:
@@ -3710,7 +3730,7 @@ be-Tarask:
       createnote_tooltip: Дадаць заўвагу на мапу
       createnote_disabled_tooltip: Наблізьце мапу, каб дадаць заўвагу
       queryfeature_tooltip: Шукаць аб'екты
-      queryfeature_disabled_tooltip: Наблізьце мапу для доступу к пошуку
+      queryfeature_disabled_tooltip: Наблізьце мапу для пошуку аб'ектаў
     profile:
       social_link_n: Сацыяльная сетка %{n}
       remove_social_link_n: Выдаліць сацыяльную сетку %{n}

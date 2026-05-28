@@ -91,6 +91,9 @@ gem "doorkeeper"
 gem "doorkeeper-i18n"
 gem "doorkeeper-openid_connect"
 
+# To parse complex referers for OAuth login
+gem "cgi"
+
 # Markdown formatting support
 gem "kramdown"
 
@@ -138,6 +141,7 @@ gem "aws-sdk-s3"
 
 # Used to resize user images
 gem "image_processing"
+gem "ruby-vips"
 
 # Used to manage svg files
 gem "inline_svg"

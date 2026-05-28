@@ -2069,7 +2069,8 @@ fi:
       update_success_flash:
         message: Asetukset päivitetty.
       navigation:
-        preferences: Asetukset
+        preferences: Käyttöliittymä
+        notification_preferences: Ilmoitukset
         advanced_preferences: Lisäasetukset
     basic_preferences:
       show:
@@ -2091,6 +2092,14 @@ fi:
           light: Vaalea
           dark: Tumma
         save: Päivitä asetukset
+    notification_preferences:
+      show:
+        title: Ilmoitusasetukset
+        direct_message: Suorat viestit
+        new_follower: Uudet seuraajat
+        save: Päivitä asetukset
+        delivery_mechanisms:
+          email: Sähköposti
     advanced_preferences:
       show:
         save: Päivitä asetukset

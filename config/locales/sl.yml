@@ -1859,6 +1859,7 @@ sl:
         ia: interlingua
         is: islandščina
         it: italijanščina
+        kw: Kornščina
         gcf: gvadalupska kreolščina
         ku-Latn: kurdščina (latinična)
         lv: latvijščina
@@ -1949,6 +1950,9 @@ sl:
       drugi %{partners}.
     partners_corpmembers: Korporativni člani OSMF
     partners_partners: partnerji
+    welcome_tou_notice_html: Z uporabo tega spletišča ali druge infrastrukture, ki
+      jo zagotavlja fundacija OpenStreetMap, se strinjate s %{terms_link}.
+    terms_of_use: Pogoji uporabe
     tou: Pogoji uporabe
     nothing_to_preview: Ničesar ni za predogled.
     learn_more: Več o tem
@@ -2285,8 +2289,9 @@ sl:
       update_success_flash:
         message: Nastavitve posodobljene.
       navigation:
-        preferences: Nastavitve
-        advanced_preferences: Napredne nastavitve
+        preferences: Vmesnik
+        notification_preferences: Obvestila
+        advanced_preferences: Napredno
     basic_preferences:
       show:
         title: Moje prilagoditve
@@ -2307,6 +2312,19 @@ sl:
           light: Svetlo
           dark: Temno
         save: Posodobi prilagoditve
+    notification_preferences:
+      show:
+        title: Nastavitve obveščanja
+        changeset_comment: Komentarji nabora sprememb
+        diary_comment: Dnevniški komentarji
+        direct_message: Neposredna sporočila
+        gpx_import_failure: 'Uvoz sledi GPS: napaka'
+        gpx_import_success: 'Uvoz sledi GPX: uspešen'
+        new_follower: Novi spremljevalci
+        note_comment: Komentarji opombe
+        save: Posodobi nastavitve
+        delivery_mechanisms:
+          email: E-poštni naslov
     advanced_preferences:
       show:
         title: Moje napredne nastavitve
@@ -2319,6 +2337,7 @@ sl:
         image: Slika
         company: Podjetje
         location: Lokacija
+        contribution_calendar: Koledar prispevkov
     descriptions:
       show:
         title: Uredi profil
@@ -2378,12 +2397,14 @@ sl:
         failure: Lokacije profila ni bilo mogoče posodobiti.
     heatmaps:
       show:
-        title: Nastavi toplotni zemljevid
-        save: Posodobi nastavitve toplotnega zemljevida
+        title: Nastavi toplotni zemljevid prispevkov
+        show_contribution_calendar_in_public: Prikaži koledar prispevkov na strani
+          profila
+        save: Posodobi nastavitve koledarja prispevkov
         cancel: Prekliči
       update:
-        success: Toplotni zemljevid je posodobljen
-        failure: Toplotnega zemljevida ni bilo mogoče posodobiti.
+        success: Koledar prispevkov je posodobljen
+        failure: Koledarja prispevkov ni bilo mogoče posodobiti.
   sessions:
     new:
       tab_title: Prijava
@@ -2401,6 +2422,7 @@ sl:
       login_button: Prijava
       with external: ali pa se prijavite prek tretje osebe
       or: ali
+      reset_to_login: Žal vam je geslo poteklo. Za prijavo ponastavite geslo.
       auth failure: Oprostite, prijava s temi podatki ni uspela.
     destroy:
       title: Odjava
@@ -2673,6 +2695,8 @@ sl:
         contributors_hr_croatia: Hrvaška
         contributors_hr_dgu: Državna geodetska uprava Hrvaške
         contributors_hr_open_data_portal: Nacionalni portal odprtih podatkov
+        contributors_nl_credit_new_html: '%{netherlands}: Vsebuje podatke &copy; AND,
+          2007'
         contributors_nl_netherlands: Nizozemska
         contributors_nz_credit_html: |-
           %{new_zealand}: Vsebuje podatke, pridobljene iz %{linz_data_service_link}
@@ -3382,6 +3406,7 @@ sl:
       change_image: Spremeni sliko
       edit_company: Uredi podjetje
       edit_location: Uredi lokacijo
+      edit_contribution_calendar: Nastavi koledar prispevkov
       contributions:
         one: '%{count} prispevek v zadnjem letu'
         two: '%{count} prispevka v zadnjem letu'
@@ -3736,6 +3761,8 @@ sl:
     map:
       map:
         title: Zemljevid
+        marker:
+          title: Oznaka na zemljevidu
       popup:
         close: Zapri
       navigation_control:
@@ -3754,6 +3781,8 @@ sl:
           two: Ste znotraj %{count} čevljev od te točke
           few: Ste znotraj %{count} čevljev od te točke
           other: Ste znotraj %{count} čevljev od te točke
+      attribution_control:
+        toggle_attribution: Preklopi pripis
       base:
         standard: Privzeta karta
         cycle_map: Kolesarska karta

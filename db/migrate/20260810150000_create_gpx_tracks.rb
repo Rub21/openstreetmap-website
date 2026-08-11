@@ -7,8 +7,7 @@ class CreateGpxTracks < ActiveRecord::Migration[8.1]
       t.integer :trackid, :null => false
       t.column :geom, "geometry(LineStringZM,4326)", :null => false
       t.index :geom, :using => :gist
+      t.foreign_key :gpx_files, :column => :gpx_id
     end
-
-    add_foreign_key :gpx_tracks, :gpx_files, :column => :gpx_id
   end
 end

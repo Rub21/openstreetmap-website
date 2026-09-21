@@ -1,5 +1,5 @@
-ARG RUBY_VERSION=3.3
-FROM ruby:$RUBY_VERSION-bookworm
+ARG RUBY_VERSION=3.4
+FROM ruby:$RUBY_VERSION-trixie
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -33,8 +33,7 @@ RUN apt-get update \
     xvfb \
     mesa-utils \
     libgl1-mesa-dri \
-  && apt-get clean \
-  && rm -rf /var/lib/apt/lists/* # Replace with `apt-get dist-clean` after upgrading to Debian 13 (Trixie)
+  && apt-get dist-clean
 
 # Install yarn globally
 RUN npm install --global yarn

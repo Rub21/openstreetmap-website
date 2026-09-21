@@ -1,11 +1,11 @@
-# Would use postgis:14-3.5, but it doesn't work with Apple Silicon
+# Would use postgis:15-3.5, but it doesn't work with Apple Silicon
 # (https://github.com/postgis/docker-postgis/issues/216).
-# Therefore we use postgres:14 and apt-install Postgis ourselves.
-FROM postgres:14
+# Therefore we use postgres:15 and apt-install Postgis ourselves.
+FROM postgres:15
 
 RUN apt-get update \
   && apt-get install --no-install-recommends -y \
-    postgresql-14-postgis-3
+    postgresql-15-postgis-3
 
 # Add db init script to install OSM-specific Postgres user.
 ADD docker/postgres/openstreetmap-postgres-init.sh /docker-entrypoint-initdb.d/

@@ -50,7 +50,10 @@ class GpxTrack < ApplicationRecord
   # First the keys of the segments in the bbox, then their points in batches
   # until the page is full, so only the segments of the page are opened.
   def self.points_in_bbox(bbox, limit:, offset: 0, after: nil)
-    keys = segment_keys_in_bbox(bbox, after)
+    keys = segment_keys_in_bbox(bbox)
+    # The keys are in page order, so the ones before the cursor come first. The
+    # cursor segment stays, the page may continue inside it.
+    keys = keys.drop_while { |key| before_cursor?(key, after) } if after
     traces = Trace.where(:id => keys.map(&:first).uniq).includes(:user).index_by(&:id)
 
     points = []
@@ -92,24 +95,23 @@ class GpxTrack < ApplicationRecord
     [index, []]
   end
 
-  # Keys of the segments in the bbox, from the cursor on, in page order.
-  def self.segment_keys_in_bbox(bbox, after)
-    segments = bbox(bbox).served
+  # Keys of the segments in the bbox, in page order. Only the bbox goes to
+  # the database, so the query can only use the GiST index; the cursor is
+  # applied on the keys afterwards.
+  def self.segment_keys_in_bbox(bbox)
+    bbox(bbox).served
+              .order(:gpx_id => :desc, :trackid => :asc, :segment => :asc)
+              .pluck(:gpx_id, :trackid, :segment)
+  end
 
-    if after
-      gpx_id, trackid, segment, _path = after
+  # True when the segment comes before the cursor in page order.
+  def self.before_cursor?(key, after)
+    gpx_id, trackid, segment = key
+    cursor_gpx_id, cursor_trackid, cursor_segment, _path = after
 
-      # The cursor segment is included, the page may continue inside it.
-      segments = segments.where(<<~SQL.squish, :gpx_id => gpx_id, :trackid => trackid, :segment => segment)
-        gpx_tracks.gpx_id < :gpx_id
-        OR (gpx_tracks.gpx_id = :gpx_id
-            AND (gpx_tracks.trackid > :trackid
-                 OR (gpx_tracks.trackid = :trackid AND gpx_tracks.segment >= :segment)))
-      SQL
-    end
-
-    segments.order(:gpx_id => :desc, :trackid => :asc, :segment => :asc)
-            .pluck(:gpx_id, :trackid, :segment)
+    gpx_id > cursor_gpx_id ||
+      (gpx_id == cursor_gpx_id && (trackid < cursor_trackid ||
+                                   (trackid == cursor_trackid && segment < cursor_segment)))
   end
 
   # Points of these segments inside the bbox, in page order. A row is
@@ -144,5 +146,5 @@ class GpxTrack < ApplicationRecord
       .count
   end
 
-  private_class_method :segment_keys_in_bbox, :points_of_segments, :skip_points, :point_counts
+  private_class_method :segment_keys_in_bbox, :before_cursor?, :points_of_segments, :skip_points, :point_counts
 end

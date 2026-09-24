@@ -41,7 +41,9 @@ class GpxTrack < ApplicationRecord
   SKIP_BATCH = 200
 
   scope :bbox, ->(bbox) { where("gpx_tracks.geom && ST_MakeEnvelope(?, ?, ?, ?, 4326)", bbox.min_lon, bbox.min_lat, bbox.max_lon, bbox.max_lat) }
-  scope :served, -> { joins(:trace).where(:gpx_files => { :visibility => %w[trackable identifiable] }) }
+
+  # Only points of these traces are served by the trackpoints API.
+  SERVED_VISIBILITIES = %w[trackable identifiable].freeze
 
   # Returns one page of points inside the bbox, ordered by gpx_id desc,
   # trackid, segment and path. after is the last point of the previous page
@@ -51,10 +53,16 @@ class GpxTrack < ApplicationRecord
   # until the page is full, so only the segments of the page are opened.
   def self.points_in_bbox(bbox, limit:, offset: 0, after: nil)
     keys = segment_keys_in_bbox(bbox)
+
+    # The traces are read by primary key; this is also where the visibility
+    # filter lives, so the key query only has the bbox condition.
+    traces = Trace.where(:id => keys.map(&:first).uniq, :visibility => SERVED_VISIBILITIES)
+                  .includes(:user).index_by(&:id)
+    keys = keys.select { |key| traces.key?(key.first) }
+
     # The keys are in page order, so the ones before the cursor come first. The
     # cursor segment stays, the page may continue inside it.
     keys = keys.drop_while { |key| before_cursor?(key, after) } if after
-    traces = Trace.where(:id => keys.map(&:first).uniq).includes(:user).index_by(&:id)
 
     points = []
     index, rows = offset.positive? ? skip_points(keys, bbox, offset) : [0, []]
@@ -95,12 +103,11 @@ class GpxTrack < ApplicationRecord
     [index, []]
   end
 
-  # Keys of the segments in the bbox, in page order. Only the bbox goes to
-  # the database, so the query can only use the GiST index; the cursor is
+  # Keys of the segments in the bbox, in page order. The bbox is the only
+  # condition, so the GiST index is the only plan; visibility and cursor are
   # applied on the keys afterwards.
   def self.segment_keys_in_bbox(bbox)
-    bbox(bbox).served
-              .order(:gpx_id => :desc, :trackid => :asc, :segment => :asc)
+    bbox(bbox).order(:gpx_id => :desc, :trackid => :asc, :segment => :asc)
               .pluck(:gpx_id, :trackid, :segment)
   end
 

@@ -44,28 +44,39 @@ class GpxTrack < ApplicationRecord
 
   scope :bbox, ->(bbox) { where("gpx_tracks.geom && ST_MakeEnvelope(?, ?, ?, ?, 4326)", bbox.min_lon, bbox.min_lat, bbox.max_lon, bbox.max_lat) }
 
-  # Only points of these traces are served by the trackpoints API.
-  SERVED_VISIBILITIES = %w[trackable identifiable].freeze
-
   # Returns one page of points inside the bbox, ordered by gpx_id desc,
-  # trackid, segment and path. after is the last point of the previous page
-  # as [gpx_id, trackid, segment, path]. offset is for the old page mode.
+  # trackid, segment and path. The page can start in two ways:
   #
-  # First the keys of the segments in the bbox, then their points in batches
-  # until the page is full, so only the segments of the page are opened.
+  # - after: cursor mode, the default. The last point of the previous page as
+  #   [gpx_id, trackid, segment, path]; the page starts right after it.
+  # - offset: page mode, kept so current clients keep working while they move
+  #   to the cursor. The number of points to skip (page * per_page); the points
+  #   are counted per segment, not read, until the segment where the page starts.
+  #
+  # The page is built in steps, each query has only one possible plan:
+  #
+  # 1. The keys (gpx_id, trackid, segment) of the segments in the bbox, in
+  #    page order. The bbox is the only condition, so the GiST index is the
+  #    only plan. In Ruby, the keys before the cursor are dropped; the cursor
+  #    segment stays, the page may continue inside it.
+  # 2. The traces of the remaining keys, by primary key, with the visibility
+  #    filter. In Ruby, only the keys of served traces are kept.
+  # 3. The points of SEGMENT_BATCH segments at a time, by primary key, until
+  #    the page is full. Segments after the page are never opened.
+  #
+  # So the cost of a page depends on the bbox, not on the page number: step 1
+  # is the same on every page, steps 2 and 3 get smaller as the cursor moves.
   def self.points_in_bbox(bbox, limit:, offset: 0, after: nil)
+    # Step 1
     keys = segment_keys_in_bbox(bbox)
+    keys = keys.drop_while { |key| before_cursor?(key, after) } if after
 
-    # The traces are read by primary key; this is also where the visibility
-    # filter lives, so the key query only has the bbox condition.
-    traces = Trace.where(:id => keys.map(&:first).uniq, :visibility => SERVED_VISIBILITIES)
+    # Step 2
+    traces = Trace.where(:id => keys.map(&:first).uniq, :visibility => Trace::VISIBILITIES)
                   .includes(:user).index_by(&:id)
     keys = keys.select { |key| traces.key?(key.first) }
 
-    # The keys are in page order, so the ones before the cursor come first. The
-    # cursor segment stays, the page may continue inside it.
-    keys = keys.drop_while { |key| before_cursor?(key, after) } if after
-
+    # Step 3
     points = []
     index, rows = offset.positive? ? skip_points(keys, bbox, offset) : [0, []]
 
@@ -106,7 +117,7 @@ class GpxTrack < ApplicationRecord
   end
 
   # Keys of the segments in the bbox, in page order. The bbox is the only
-  # condition, so the GiST index is the only plan; visibility and cursor are
+  # condition, so the GiST index is the only plan; cursor and visibility are
   # applied on the keys afterwards.
   def self.segment_keys_in_bbox(bbox)
     bbox(bbox).order(:gpx_id => :desc, :trackid => :asc, :segment => :asc)

@@ -50,7 +50,7 @@ xml.gpx("version" => "1.0",
         xml.trkseg do
           trksg.each do |tracepoint|
             xml.trkpt("lat" => tracepoint.lat.to_s, "lon" => tracepoint.lon.to_s) do
-              xml.time tracepoint.timestamp.xmlschema
+              xml.time tracepoint.timestamp.xmlschema if tracepoint.timestamp
             end
           end
         end

@@ -4,12 +4,10 @@
 #
 # Table name: gpx_tracks
 #
-#  gpx_id     :bigint           not null, primary key
-#  trackid    :integer          not null, primary key
-#  segment    :integer          not null, primary key
-#  geom       :st_geometry      not null, geometry, 4326
-#  started_at :datetime
-#  ended_at   :datetime
+#  gpx_id  :bigint           not null, primary key
+#  trackid :integer          not null, primary key
+#  segment :integer          not null, primary key
+#  geom    :st_line_string   not null, linestring, 4326
 #
 # Indexes
 #
@@ -81,7 +79,7 @@ class GpxTrack < ApplicationRecord
     index, rows = offset.positive? ? skip_points(keys, bbox, offset) : [0, []]
 
     loop do
-      rows.each { |row| points << Point.new(*row.first(7), Time.at(row.last).utc, traces[row.first]) }
+      rows.each { |row| points << Point.new(*row.first(7), point_time(row.last), traces[row.first]) }
       break if points.size >= limit || index >= keys.size
 
       rows = points_of_segments(keys[index, SEGMENT_BATCH], bbox, after)
@@ -157,6 +155,12 @@ class GpxTrack < ApplicationRecord
                  Arel.sql("ST_Z(point.geom)"), Arel.sql("ST_M(point.geom)"))
   end
 
+  # Time of a point from its M value, nil when the point has no timestamp
+  # (M is -Infinity, see TraceLinestringJob).
+  def self.point_time(epoch)
+    Time.at(epoch).utc if epoch.finite?
+  end
+
   # Number of points of these segments inside the bbox, by segment key.
   def self.point_counts(keys, bbox)
     where([:gpx_id, :trackid, :segment] => keys)
@@ -166,5 +170,5 @@ class GpxTrack < ApplicationRecord
       .count
   end
 
-  private_class_method :segment_keys_in_bbox, :before_cursor?, :points_of_segments, :skip_points, :point_counts
+  private_class_method :segment_keys_in_bbox, :before_cursor?, :points_of_segments, :skip_points, :point_time, :point_counts
 end

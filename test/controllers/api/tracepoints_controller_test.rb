@@ -27,24 +27,19 @@ module Api
       )
     end
 
-    def test_tracepoints_public
-      point = create(:trace, :without_validations, :visibility => "public", :latitude => 1, :longitude => 1) do |trace|
-        create(:tracepoint, :trace => trace, :latitude => 1 * GeoRecord::SCALE, :longitude => 1 * GeoRecord::SCALE)
+    # Only trackable and identifiable traces are served, the points of
+    # public and private traces are not in the response.
+    def test_tracepoints_public_and_private
+      %w[public private].each do |visibility|
+        create(:trace, :without_validations, :visibility => visibility, :latitude => 1, :longitude => 1) do |trace|
+          create(:tracepoint, :trace => trace, :latitude => 1 * GeoRecord::SCALE, :longitude => 1 * GeoRecord::SCALE)
+          convert(trace)
+        end
       end
-      minlon = point.longitude - 0.001
-      minlat = point.latitude - 0.001
-      maxlon = point.longitude + 0.001
-      maxlat = point.latitude + 0.001
-      bbox = "#{minlon},#{minlat},#{maxlon},#{maxlat}"
-      get api_tracepoints_path(:bbox => bbox)
+      get api_tracepoints_path(:bbox => "0.999,0.999,1.001,1.001")
       assert_response :success
       assert_select "gpx[version='1.0'][creator='OpenStreetMap.org']", :count => 1 do
-        assert_select "trk" do
-          assert_select "name", :count => 0
-          assert_select "desc", :count => 0
-          assert_select "url", :count => 0
-          assert_select "trkseg", :count => 1
-        end
+        assert_select "trk", :count => 0
       end
     end
 
@@ -52,6 +47,7 @@ module Api
       point = create(:trace, :visibility => "trackable", :latitude => 51.51, :longitude => -0.14) do |trace|
         create(:tracepoint, :trace => trace, :trackid => 1, :latitude => (51.510 * GeoRecord::SCALE).to_i, :longitude => (-0.140 * GeoRecord::SCALE).to_i)
         create(:tracepoint, :trace => trace, :trackid => 2, :latitude => (51.511 * GeoRecord::SCALE).to_i, :longitude => (-0.141 * GeoRecord::SCALE).to_i)
+        convert(trace)
       end
       minlon = point.longitude - 0.002
       minlat = point.latitude - 0.002
@@ -79,6 +75,7 @@ module Api
     def test_tracepoints_identifiable
       point = create(:trace, :visibility => "identifiable", :latitude => 51.512, :longitude => 0.142) do |trace|
         create(:tracepoint, :trace => trace, :latitude => (51.512 * GeoRecord::SCALE).to_i, :longitude => (0.142 * GeoRecord::SCALE).to_i)
+        convert(trace)
       end
       minlon = point.longitude - 0.002
       minlat = point.latitude - 0.002
@@ -160,11 +157,138 @@ module Api
 
     # Ensure the lat/lon is formatted as a decimal e.g. not 4.0e-05
     def test_lat_lon_xml_format
-      create(:tracepoint, :latitude => (0.00004 * GeoRecord::SCALE).to_i, :longitude => (0.00008 * GeoRecord::SCALE).to_i)
+      point = create(:tracepoint, :latitude => (0.00004 * GeoRecord::SCALE).to_i, :longitude => (0.00008 * GeoRecord::SCALE).to_i)
+      convert(point.trace)
 
       get api_tracepoints_path(:bbox => "0,0,0.1,0.1")
       assert_match(/lat="0.0000400"/, response.body)
       assert_match(/lon="0.0000800"/, response.body)
+    end
+
+    def test_point_without_timestamp_has_no_time
+      trace = create(:trace, :visibility => "trackable")
+      create(:tracepoint, :trace => trace, :latitude => 1 * GeoRecord::SCALE, :longitude => 1 * GeoRecord::SCALE, :timestamp => Time.utc(2026, 1, 1))
+      create(:tracepoint, :trace => trace, :latitude => (1.0001 * GeoRecord::SCALE).to_i, :longitude => 1 * GeoRecord::SCALE, :timestamp => Time.utc(2026, 1, 2))
+      trace.points.where(:latitude => (1.0001 * GeoRecord::SCALE).to_i).update_all(:timestamp => nil) # rubocop:disable Rails/SkipsModelValidations
+      convert(trace)
+
+      get api_tracepoints_path(:bbox => "0.999,0.999,1.001,1.001")
+      assert_response :success
+      assert_select "trkpt", :count => 2
+      assert_select "trkpt time", :count => 1
+    end
+
+    # The first page comes without a cursor and has the next page in the Link
+    # header. The last page has no Link header.
+    def test_cursor_pagination
+      traces = Array.new(2) { create_trace_with_points(3) }
+
+      with_settings(:tracepoints_per_page => 4) do
+        # the newest trace first, so the first page has the 3 points of the
+        # second trace and 1 point of the first
+        get api_tracepoints_path(:bbox => "0.999,0.999,1.001,1.001")
+        assert_response :success
+        assert_select "trkpt", :count => 4
+        assert_select "trk", :count => 2
+        assert_select "trk url", :count => 2
+        assert_select "trk:first-child url", :text => trace_url(traces.last)
+
+        next_page = next_link
+        assert_match(/cursor=/, next_page)
+
+        get next_page
+        assert_response :success
+        assert_select "trkpt", :count => 2
+        assert_select "trk", :count => 1
+        assert_select "trk url", :text => trace_url(traces.first)
+        assert_nil next_link
+
+        # the cursor is the last point of the page, so the pages do not
+        # overlap and no point is missing
+        get api_tracepoints_path(:bbox => "0.999,0.999,1.001,1.001")
+        first_times = response.body.scan(%r{<time>(.*?)</time>})
+        get next_page
+        second_times = response.body.scan(%r{<time>(.*?)</time>})
+        assert_equal 6, (first_times + second_times).uniq.size
+      end
+    end
+
+    def test_cursor_pagination_with_an_exact_number_of_pages
+      create_trace_with_points(4)
+
+      with_settings(:tracepoints_per_page => 2) do
+        get api_tracepoints_path(:bbox => "0.999,0.999,1.001,1.001")
+        assert_select "trkpt", :count => 2
+        assert_not_nil next_link
+
+        get next_link
+        assert_select "trkpt", :count => 2
+        assert_nil next_link
+      end
+    end
+
+    def test_cursor_invalid
+      ["not-base64!", Base64.urlsafe_encode64("1|2|3"), Base64.urlsafe_encode64("a|b|c|d")].each do |cursor|
+        get api_tracepoints_path(:bbox => "-0.1,-0.1,0.1,0.1", :cursor => cursor)
+        assert_response :bad_request, "The cursor #{cursor} was expected to be invalid"
+        assert_equal "The cursor parameter is invalid", @response.body
+      end
+    end
+
+    # The old page parameter still works, without a Link header.
+    def test_page_pagination
+      create_trace_with_points(5)
+
+      with_settings(:tracepoints_per_page => 2) do
+        get api_tracepoints_path(:bbox => "0.999,0.999,1.001,1.001", :page => 0)
+        assert_response :success
+        assert_select "trkpt", :count => 2
+        assert_nil next_link
+
+        get api_tracepoints_path(:bbox => "0.999,0.999,1.001,1.001", :page => 2)
+        assert_response :success
+        assert_select "trkpt", :count => 1
+
+        get api_tracepoints_path(:bbox => "0.999,0.999,1.001,1.001", :page => 3)
+        assert_response :success
+        assert_select "trkpt", :count => 0
+      end
+    end
+
+    private
+
+    ##
+    # convert the points of a trace into gpx_tracks rows, which is what the api reads
+    def convert(trace)
+      TraceLinestringJob.perform_now(trace)
+    end
+
+    ##
+    # create an identifiable trace with count points at 1,1, one step north of
+    # each other, and convert it
+    def create_trace_with_points(count)
+      create(:trace, :visibility => "identifiable", :latitude => 1, :longitude => 1) do |trace|
+        count.times do |index|
+          create(:tracepoint, :trace => trace, :latitude => ((1 + (0.00001 * index)) * GeoRecord::SCALE).to_i, :longitude => 1 * GeoRecord::SCALE,
+                              :timestamp => Time.utc(2026, 1, 1) + (trace.id * 1000) + index)
+        end
+        convert(trace)
+      end
+    end
+
+    ##
+    # the url of a trace as it appears in the gpx
+    def trace_url(trace)
+      url_for(:controller => "/traces", :action => "show", :display_name => trace.user.display_name, :id => trace.id, :only_path => true)
+    end
+
+    ##
+    # the url of the next page from the Link header, nil when there is none
+    def next_link
+      link = response.headers["Link"]
+      return nil if link.nil?
+
+      link[/<(.*)>; rel="next"/, 1]
     end
   end
 end

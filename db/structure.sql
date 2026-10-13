@@ -871,7 +871,8 @@ CREATE TABLE public.gpx_files (
     "timestamp" timestamp without time zone NOT NULL,
     description character varying DEFAULT ''::character varying NOT NULL,
     inserted boolean NOT NULL,
-    visibility public.gpx_visibility_enum DEFAULT 'trackable'::public.gpx_visibility_enum NOT NULL
+    visibility public.gpx_visibility_enum DEFAULT 'trackable'::public.gpx_visibility_enum NOT NULL,
+    replicated boolean DEFAULT true NOT NULL
 );
 
 
@@ -2626,6 +2627,13 @@ CREATE INDEX gpx_file_tags_tag_idx ON public.gpx_file_tags USING btree (tag);
 
 
 --
+-- Name: gpx_files_not_replicated_idx; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX gpx_files_not_replicated_idx ON public.gpx_files USING btree (id) WHERE (NOT replicated);
+
+
+--
 -- Name: gpx_files_timestamp_idx; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3819,6 +3827,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('23'),
 ('22'),
 ('21'),
+('20261013120000'),
 ('20260810150000'),
 ('20260624101500'),
 ('20260604105008'),

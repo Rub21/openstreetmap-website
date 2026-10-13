@@ -132,6 +132,7 @@ module Traces
       assert_equal "Changed the visibility of 1 trace.", flash[:notice]
 
       assert_equal "identifiable", old_public.reload.visibility
+      assert_not old_public.replicated
       assert_equal "private", old_private.reload.visibility
       assert_equal "public", recent_public.reload.visibility
       assert_equal "public", other_users_trace.reload.visibility

@@ -15,9 +15,11 @@
 #  description :string           default(""), not null
 #  inserted    :boolean          not null
 #  visibility  :enum             default("trackable"), not null
+#  replicated  :boolean          default(TRUE), not null
 #
 # Indexes
 #
+#  gpx_files_not_replicated_idx       (id) WHERE (NOT replicated)
 #  gpx_files_timestamp_idx            (timestamp)
 #  gpx_files_visible_visibility_idx   (visible,visibility)
 #  index_gpx_files_on_user_id_and_id  (user_id,id)
@@ -56,6 +58,7 @@ class Trace < ApplicationRecord
   validates :visibility, :inclusion => { :in => VISIBILITIES }, :on => :create
   validate :visibility_not_changed_to_legacy, :on => :update
 
+  before_save :reset_replicated
   after_save :set_filename
 
   # True if a new upload can use this visibility.
@@ -305,6 +308,23 @@ class Trace < ApplicationRecord
     TraceDestroyerJob.perform_later(self)
   end
 
+  # Delete the gpx file, the pictures and the points of a trace, but keep the
+  # row in gpx_files with visible set to false, so the deletion can be
+  # picked up by the replication.
+  def destroy_contents
+    transaction do
+      tags.delete_all
+      points.delete_all
+      file.purge_later
+      image.purge_later
+      icon.purge_later
+      self.visible = false
+      save!
+      # rubocop:disable-next Rails/SkipsModelValidations
+      User.decrement_counter(:traces_count, user_id)
+    end
+  end
+
   private
 
   def content_type(file)
@@ -323,6 +343,13 @@ class Trace < ApplicationRecord
     when /\bXML\b.*\bbzip2\b/ then "application/x-bzip2"
     else "application/gpx+xml"
     end
+  end
+
+  # Mark the trace as changed for the replication when its import finishes,
+  # when its visibility changes or when it is deleted. A trace that is not
+  # imported yet has nothing to announce.
+  def reset_replicated
+    self.replicated = false if inserted? && (inserted_changed? || visibility_changed? || visible_changed?)
   end
 
   def set_filename

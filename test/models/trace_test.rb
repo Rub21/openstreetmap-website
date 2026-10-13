@@ -335,6 +335,72 @@ class TraceTest < ActiveSupport::TestCase
     assert_not trace.inserted
   end
 
+  def test_replicated_is_true_before_import
+    trace = create(:trace, :inserted => false)
+
+    assert trace.replicated
+  end
+
+  def test_replicated_reset_on_import
+    trace = create(:trace, :inserted => false, :fixture => "a")
+
+    trace.import
+
+    assert trace.reload.inserted
+    assert_not trace.replicated
+  end
+
+  def test_replicated_reset_on_visibility_change
+    trace = create(:trace, :visibility => "trackable")
+
+    trace.update(:visibility => "identifiable")
+
+    assert_not trace.reload.replicated
+  end
+
+  def test_replicated_reset_on_delete
+    trace = create(:trace)
+
+    trace.update(:visible => false)
+
+    assert_not trace.reload.replicated
+  end
+
+  def test_replicated_not_reset_on_other_changes
+    trace = create(:trace)
+    trace.update(:replicated => true)
+
+    trace.update(:description => "New description")
+
+    assert trace.reload.replicated
+  end
+
+  def test_replicated_not_reset_before_import
+    trace = create(:trace, :inserted => false)
+
+    trace.update(:visible => false)
+
+    assert trace.reload.replicated
+  end
+
+  def test_destroy_contents_keeps_row
+    trace = create(:trace, :fixture => "a")
+    create(:tracetag, :trace => trace)
+    create(:tracepoint, :trace => trace)
+    user = trace.user
+    traces_count = user.reload.traces_count
+    trace.update(:visible => false)
+
+    trace.destroy_contents
+
+    trace.reload
+    assert_not trace.visible
+    assert trace.inserted
+    assert_equal 0, trace.tags.count
+    assert_equal 0, trace.points.count
+    assert_equal traces_count - 1, user.reload.traces_count
+  end
+
   private
 
   def check_query(query, traces)
